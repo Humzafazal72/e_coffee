@@ -1,0 +1,119 @@
+{% extends "header_footer.html" %}
+{% block content %}
+{% load static %}
+  <div class="about_section">
+  <!--vegetables  section start -->
+  <div class="vegetables_section layout_padding">
+    <div class="container">
+      <div class="image_2"><img src= "{% static 'img/img-2.png' %}" ></div>
+      <h1 class="about_taital">Our Coffee</h1>
+      <p class="lorem_text">Coffee.... now at your Doorstep.</p>
+      <div class="vegetables_section_2 layout_padding">
+        <div class="row">
+          <div class="col">
+            <div class="box_section">
+              <div class="image_4"><img src= "{% static 'img/Cappuccino.jpg' %}"></div>
+              <h2 class="dolor_text">$<span style="color:#6F4E37;">10</span></h2>
+              <h2 class="dolor_text">Cappuccino</h2>
+              <h2 class="dolor_text_1">250 ml</h2>
+              <p class="tempor_text">adipiscing elit, sed do eiusmod tempor </p>
+              <div class="buy_bt_1 active"><a href="{% url 'add_to_cart' name='Cappuccino' %}">ADD TO CART</a></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="box_section">
+              <div class="image_4"><img src= "{% static 'img/Espresso.jpg' %}"></div>
+              <h2 class="dolor_text">$<span style="color: #6F4E37;">10</span></h2>
+              <h2 class="dolor_text">Espresso</h2>
+              <h2 class="dolor_text_1">250 ml</h2>
+              <p class="tempor_text">adipiscing elit, sed do eiusmod tempor </p>
+              <div class="buy_bt_1"><a href="{% url 'add_to_cart' name='Espresso' %}">ADD TO CART</a></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="box_section">
+              <div class="image_4"><img src= "{% static 'img/Americano.jpg' %}"></div>
+              <h2 class="dolor_text">$<span style="color: #6F4E37;">10</span></h2>
+              <h2 class="dolor_text">Americano</h2>
+              <h2 class="dolor_text_1">250 ml</h2>
+              <p class="tempor_text">adipiscing elit, sed do eiusmod tempor </p>
+              <div class="buy_bt_1"><a href="{% url 'add_to_cart' name='Americano' %}">ADD TO CART</a></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="box_section">
+              <div class="image_4"><img src= "{% static 'img/Latte.png' %}"></div>
+              <h2 class="dolor_text">$<span style="color:#6F4E37;">10</span></h2>
+              <h2 class="dolor_text">Latte</h2>
+              <h2 class="dolor_text_1">250 ml</h2>
+              <p class="tempor_text">adipiscing elit, sed do eiusmod tempor </p>
+              <div class="buy_bt_1"><a href="{% url 'add_to_cart' name='Latte' %}">ADD TO CART</a></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="box_section">
+              <div class="image_4"><img src= "{% static 'img/Iced coffee.jpg' %}"></div>
+              <h2 class="dolor_text">$<span style="color: #6F4E37;">10</span></h2>
+              <h2 class="dolor_text">Iced coffee</h2>
+              <h2 class="dolor_text_1">250 ml</h2>
+              <p class="tempor_text">adipiscing elit, sed do eiusmod tempor </p>
+              <div class="buy_bt_1"><a href="{% url 'add_to_cart' name='Iced coffee' %}">ADD TO CART</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="box_section">
+              <div class="image_4"><img src="{% static 'img/Flat white.jpg' %}"></div>
+              <h2 class="dolor_text">$<span style="color: #6F4E37;">10</span></h2>
+              <h2 class="dolor_text">Flat white</h2>
+              <h2 class="dolor_text_1">250 ml</h2>
+              <p class="tempor_text">adipiscing elit, sed do eiusmod tempor </p>
+              <div class="buy_bt_1"><a href="{% url 'add_to_cart' name='Flat white' %}">ADD TO CART</a></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="box_section">
+              <div class="image_4"><img src= "{% static 'img/turkish coffee.jpg' %}"></div>
+              <h2 class="dolor_text">$<span style="color:#6F4E37;">10</span></h2>
+              <h2 class="dolor_text">Turkish Coffee</h2>
+              <h2 class="dolor_text_1">250 ml</h2>
+              <p class="tempor_text">adipiscing elit, sed do eiusmod tempor </p>
+              <div class="buy_bt_1"><a href="{% url 'add_to_cart' name='Turkish Coffee' %}">ADD TO CART</a></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="box_section">
+              <div class="image_4"><img src= "{% static 'img/Black coffee.jpg' %}"></div>
+              <h2 class="dolor_text">$<span style="color:#6F4E37;">10</span></h2>
+              <h2 class="dolor_text">Black coffee</h2>
+              <h2 class="dolor_text_1">250 ml</h2>
+              <p class="tempor_text">adipiscing elit, sed do eiusmod tempor </p>
+              <div class="buy_bt_1"><a href="{% url 'add_to_cart' name='Black coffee' %}">ADD TO CART</a></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="box_section">
+              <div class="image_4"><img src= "{% static 'img/Iced Espresso.jpg' %}"></div>
+              <h2 class="dolor_text">$<span style="color: #6F4E37;">10</span></h2>
+              <h2 class="dolor_text">Iced Espresso</h2>
+              <h2 class="dolor_text_1">250 ml</h2>
+              <p class="tempor_text">adipiscing elit, sed do eiusmod tempor </p>
+              <div class="buy_bt_1"><a href="{% url 'add_to_cart' name='Iced Espresso' %}">ADD TO CART</a></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="box_section">
+              <div class="image_4"><img src= "{% static 'img/Frappuccino.png' %}"></div>
+              <h2 class="dolor_text">$<span style="color: #6F4E37;">10</span></h2>
+              <h2 class="dolor_text">Frappuccino</h2>
+              <h2 class="dolor_text_1">250 ml</h2>
+              <p class="tempor_text">adipiscing elit, sed do eiusmod tempor </p>
+              <div class="buy_bt_1"><a href="{% url 'add_to_cart' name='Frappuccino' %}">ADD TO CART</a></div>
+            </div>
+          </div>
+        </div>
+  </div>
+  </div>
+  <!--vegetables section end -->
+{% endblock  %}

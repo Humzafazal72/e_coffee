@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login & Registration Form</title>
+  <!---Custom CSS File--->
+  <link rel="stylesheet" href= "{% static 'css/login.css' %}" >
+</head>
+<body>
+  <div class="container">
+    <input type="checkbox" id="check">
+    <div class="login form">
+      {% if fail %}
+        <h3 style="color: red;text-align: center;">Login Failed... please try again.</h1>
+      {% endif %}
+      <header style="color:#6F4E37;">Login</header>
+      <form action="{%url 'login' %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Enter your email"  name="email" required>
+        <input type="password" placeholder="Enter your password" name="password" required>
+        <input type="submit" class="button" value="Login">
+      </form>
+      <div class="signup">
+        <span class="signup">Don't have an account?
+         <label for="check">Register</label>
+        </span>
+      </div>
+    </div>
+     
+    <div class="registration form">
+      <header style="color:#6F4E37;">Register</header>
+      <form action="{%url 'register' %}" method="post" >
+      {% csrf_token %}
+        <input type="text" placeholder="Enter your Username" name="username" required>
+        <input type="email" placeholder="Enter your email" name="email" required>
+        <input type="password" placeholder="Create a password" name="password" required>
+        <input type="password" placeholder="Confirm your password" >
+        <input type="submit" class="button" value="Register">
+      </form>
+      <div class="signup">
+        <span class="signup">Already have an account?
+         <label for="check">Login</label>
+        </span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
