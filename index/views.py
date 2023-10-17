@@ -1,8 +1,11 @@
-
+import random
+from decimal import Decimal
 from django.shortcuts import render,redirect
+from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from .models import Coffee,customers,Cart,CartItem
+from .models import Coffee,customers,Cart,CartItem,order
+from django.contrib import messages
 
 def index(request):
     if not request.user.is_authenticated:
@@ -33,8 +36,25 @@ def cart(request):
         customer=customers.objects.get(pk=request.user.username)
         cart=Cart.objects.get(user=customer)
         Cartitems=CartItem.objects.filter(cart=cart)
+        total_all=[]
 
-        return render(request, 'cart.html',{'cartitem':Cartitems})
+        for i in Cartitems:
+            if i.quantity==1:
+                i.delete()
+                continue
+            else:    
+                total_all.append(i.quantity*i.coffee.price)
+
+        sub_total=sum(total_all)
+        sub_total=Decimal(sub_total)
+        total=sub_total + Decimal(10.00)
+
+        id=random.randint(1,100000000)
+        print(type(total))
+        Order=order.objects.create(id=id,cart=cart,total=total)
+        return render(request, 'cart.html',{'cartitem':Cartitems,'sub':sub_total,'total':sub_total+10,'order_id':Order.id})
+    
+    return redirect('shop')
 
 
 def add_to_cart(request,name):
@@ -51,7 +71,28 @@ def add_to_cart(request,name):
             CartItem.objects.create(coffee=type,cart=cart,quantity=quantity)
         except CartItem.DoesNotExist:
             CartItem.objects.create(coffee=type,cart=cart,quantity=quantity)
-                
 
         return redirect('shop')
     
+
+def remove_coffee(request,name):
+    customer=customers.objects.get(pk=request.user.username)
+    cart=Cart.objects.get(user=customer)
+    cartitems=CartItem.objects.filter(cart=cart,coffee=name)
+    for i in cartitems:
+        i.quantity-=1
+        i.save()
+
+    return redirect('cart')
+
+def checkout(request,order_id):
+    return HttpResponse("Work going on.....")
+
+def finalize(request,order_id):
+    Order=order.objects.get(id=order_id)
+    cart=Order.cart
+    #apply logic for employee view.
+    cartitems=CartItem.objects.filter(cart=cart).delete()
+    messages.success(request,f"Your order has been placed successfully!!")
+
+    return redirect('shop')

@@ -28,3 +28,8 @@ class CartItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
     def __str__(self) -> str:
         return f"{self.cart}:{self.coffee}"
+    
+class order(models.Model):
+    id=models.BigIntegerField(primary_key=True)
+    total=models.DecimalField(max_digits=6, decimal_places=2)    
+    cart=models.ForeignKey(Cart,on_delete=models.CASCADE)

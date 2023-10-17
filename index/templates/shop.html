@@ -1,8 +1,19 @@
 {% extends "header_footer.html" %}
 {% block content %}
 {% load static %}
+
   <div class="about_section">
-  <!--vegetables  section start -->
+      {% if messages %}
+    {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert" style="text-align: center;">
+                <strong>Success!</strong> {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+      {% else %}
+      {% endif %}
   <div class="vegetables_section layout_padding">
     <div class="container">
       <div class="image_2"><img src= "{% static 'img/img-2.png' %}" ></div>
