@@ -4,17 +4,32 @@
 
     <!--contact section start -->
   <div class="contact_section layout_padding margin_top_80">
+        {% if messages %}
+    {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert" style="text-align: center;">
+                <strong>Message sent!</strong> {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+      {% else %}
+      {% endif %}
+
     <div class="container">
       <div class="image_2"><img src= "{% static 'img/img-2.png' %}"></div>
       <h1 class="about_taital">Contact Us</h1>
       <div class="row">
           <div class="col-md-6">
-            <div class="mail_sectin">
-              <input type="text" class="email-bt" placeholder="Your Name" name="Name">
-              <input type="text" class="email-bt" placeholder="Email" name="email">
-              <input type="text" class="email-bt" placeholder="Phone Number" name="no.">
-              <textarea class="massage-bt" placeholder="Message" rows="5" id="comment" name="Message"></textarea>
-              <div class="send_bt"><a href="#">Send</a></div>
+            <div class="mail_sectin">          
+              <form method="post" action="{% url 'contact_form' %}">
+                  {% csrf_token %}
+                  <input type="text" class="email-bt" placeholder="Your Name" name="Name" required>
+                  <input type="email" class="email-bt" placeholder="Email" name="email" required>
+                  <input type="text" class="email-bt" placeholder="Phone Number" name="phone" required>
+                  <textarea class="massage-bt" placeholder="Message" rows="5" name="message" required></textarea>
+                  <button type="submit" class="send_bt">Send</button>
+              </form>
             </div>
           </div>
           <div class="col-md-6">

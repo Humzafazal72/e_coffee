@@ -33,3 +33,10 @@ class order(models.Model):
     id=models.BigIntegerField(primary_key=True)
     total=models.DecimalField(max_digits=6, decimal_places=2)    
     cart=models.ForeignKey(Cart,on_delete=models.CASCADE)
+
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=20)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15, blank=True, null=True)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)

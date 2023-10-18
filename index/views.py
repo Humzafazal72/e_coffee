@@ -4,7 +4,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from .models import Coffee,customers,Cart,CartItem,order
+from .models import Coffee,customers,Cart,CartItem,order,ContactMessage
 from django.contrib import messages
 
 def index(request):
@@ -31,6 +31,18 @@ def contact(request):
     else:
         return render(request,'contact.html',{'remove_login':True})
 
+def contact_form(request):
+    if request.method=='POST':
+        name = request.POST['Name']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        message = request.POST['message']
+        
+        ContactMessage.objects.create(name=name, email=email, phone=phone, message=message)
+        
+        messages.success(request,f"We'll get back to you asap.")
+        return redirect('contact')
+
 def cart(request):
     if request.user.is_authenticated:
         customer=customers.objects.get(pk=request.user.username)
@@ -39,20 +51,26 @@ def cart(request):
         total_all=[]
 
         for i in Cartitems:
-            if i.quantity==1:
+            if i.quantity==0:
                 i.delete()
                 continue
-            else:    
+            else:
                 total_all.append(i.quantity*i.coffee.price)
 
         sub_total=sum(total_all)
         sub_total=Decimal(sub_total)
-        total=sub_total + Decimal(10.00)
 
         id=random.randint(1,100000000)
-        print(type(total))
         Order=order.objects.create(id=id,cart=cart,total=total)
-        return render(request, 'cart.html',{'cartitem':Cartitems,'sub':sub_total,'total':sub_total+10,'order_id':Order.id})
+
+        shipping=Decimal(10)
+        if sub_total==0:
+            shipping=0
+                
+        total=sub_total+shipping
+
+        return render(request, 'cart.html',{'cartitem':Cartitems,'sub':sub_total,
+                                            'total':total,'order_id':Order.id,'shipping':shipping})
     
     return redirect('shop')
 
