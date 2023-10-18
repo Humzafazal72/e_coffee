@@ -3,18 +3,16 @@ from index.models import customers,Cart
 from django.shortcuts import render, redirect
 from django.contrib.auth import login,logout
 from django.contrib.auth import authenticate
+from django.contrib import messages
 
 
 def register(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         email = request.POST.get('email')
-        password = request.POST.get('password')
-        print(username, password)
-        
-        # Check if the username is unique
+        password = request.POST.get('password') 
+        # Check if the email is unique
         if User.objects.filter(email=email).exists():
-            # Handle the case where the username is not unique
             pass
         else:
             # Create a new user
@@ -22,16 +20,12 @@ def register(request):
             user.save()
             # Create a new customer instance
             customer, created = customers.objects.get_or_create(email=email, u_name=username)
-
             # Create a Cart object associated with the customer
             Cart.objects.create(user=customer)
-
             # Log the user in after registration
             login(request, user)
-
             # Redirect to the 'index' page
             return redirect('index')
-
     return render(request, 'login_form.html')
 
 def login_(request):
